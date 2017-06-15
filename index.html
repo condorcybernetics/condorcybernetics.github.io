@@ -1,0 +1,210 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles_new.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript">
+      $(function(){
+          var current;
+          var currentString;
+          var clicks = 0;
+
+          function startUp(newCurrentString){
+            $("#website_header").addClass("topbar_fixed", {duration:1500, queue: false});
+
+            var currentPosition = $(".subheaders").offset().top;
+            $(".subheaders").css({"top":currentPosition, "position": "fixed", "width":"99%"});
+            var bottomHeight = $(document).height();
+            $(".subheaders").animate({"top": 0, "margin-top": bottomHeight - 60}, 1500, function(){
+              $(".subheaders").addClass("bottombar_fixed",
+                function(){
+                $(".subheaders").removeAttr("style");
+                });
+              });
+
+            currentString = newCurrentString;
+            current = $(currentString);
+            current.show(1500);
+            clicks += 1;
+          }
+
+          function changeCurrent(newCurrentString){
+            if (clicks >= 1){
+              if (!(currentString === newCurrentString)){
+                current.hide(1500);
+                currentString = newCurrentString;
+                current = $(currentString);
+                current.show(1500);
+              }
+            } else {
+              startUp(newCurrentString);
+            }
+          }
+
+          window.onpopstate = function(event) {
+            if (clicks > 0){
+              if (location.pathname === "/wangjohn/www/"){
+                var stringName = "#about_me"
+              } else {
+                var stringName = location.pathname.replace("/wangjohn/www/", "#");
+              }
+              changeCurrent(stringName);
+            }
+          };
+
+
+          $("#website_header").click(function(){
+              // history.pushState('', "About Me", "about_me.html");
+              changeCurrent("#about_me");
+              });
+          $(".thinker_click").click(function(){
+              // history.pushState('', "Thinker", "thinker.html");
+              changeCurrent("#thinker");
+              });
+          $(".believer_click").click(function(){
+              // history.pushState('', "Believer", "believer.html");
+              changeCurrent("#believer");
+              });
+          $(".student_click").click(function(){
+              // history.pushState('', "Student", "student.html");
+              changeCurrent("#student");
+              });
+          $(".coder_click").click(function(){
+              // history.pushState('', "Coder", "coder.html");
+              changeCurrent("#coder");
+              });
+      });
+</script>
+<title>Condor Cybernetics</title>
+    </head>
+
+    <div id="website_header" class="super_headers middle_bar">Condor Cybernetics</div>
+    <div class="subheaders">
+      <div class="website_subheader super_headers thinker_click">Thinker</div>
+      <div class="website_subheader super_headers believer_click">Believer</div>
+      <div class="website_subheader super_headers student_click">Student</div>
+      <div class="website_subheader super_headers coder_click">Coder</div>
+    </div>
+
+    <div id="middle_page_container">
+      <div id="about_me" style="display:none">
+        <p>I studied computer science and math at MIT.</p>
+
+        <p>If you want to hire me, shoot me an email at bonny.jain@gmail.com to see if there's a snug fit. If you're a programmer, find me a way to return the k largest elements in a max-heap of size N in O(k) time.</p>
+      </div>
+
+      <div id="thinker" style="display:none">
+        <div class="research_subject_first">
+          <h2>Modelling Signal Interactions with Application to Financial Time Series</h2>
+          <p class="document_listing">Condor Cybernetics. "Modelling Signal Interactions with Application to Financial Time Series." <a href="bjain_meng_thesis.pdf">PDF</a></p>
+          <p>In this thesis, we concern ourselves with the problem of reasoning over a set of objects evolving over time that are coupled through interaction structures that are themselves changing over time. We focus on inferring time-varying interaction structures among a set of objects from sequences of noisy time series observations with the caveat that the number of interaction structures is not known a priori.
+          </p>
+          <h2>Security on Networks</h2>
+          <p class="document_listing">Condor Cybernetics, John Wang, Iris Xu. "Security on Networks." <a href="security_on_networks.pdf">PDF</a></p>
+          <p>When infections spread across a network, agents can choose to protect themselves from infection. However, these security mechanisms can be modelled as being imperfect and costing some investment. This paper investigates network models for infection in networks, and the decisions that agents make of whether or not to protect themselves.
+          </p>
+          <h2>Google Scholar Profile: <a href="https://scholar.google.com/citations?user=8i4BwAYAAAAJ&hl=en&oi=ao">bonnyjain</a></h2>          
+        </div>
+      </div>
+      <div id="believer" style="display:none">
+        <h2>I Believe In:</h2>
+        <p class="belief_statement"><span class="belief">Long runs at night</span>, since the night is when the world is calm and when you can listen to the nothingness. The nothingness always tells you something, but only when you listen.</p>
+        <p class="belief_statement"><span class="belief">Version control</span>, because the world is made up of a series of mistakes. Don't lose your memories, because when you're older, that's all you'll have left. Our culture puts so much effort into constantly pushing forward, but sometimes its better to backtrack and think in the past. Going backwards and making a big leap is better than constant but frustratingly marginal improvements.</p>
+        <p class="belief_statement"><span class="belief">Literature</span>, because then you realize that nothing is new under the sun. Humans have been the same for thousands of years, the only changes have been their implements.</p>
+        <p class="belief_statement"><span class="belief">Music</span>, because mood is one of the great drivers of action, yet also a provoker of thought. It is soothing yet powerful, and brings with it a case full of contradictions.</p>
+        <p class="belief_statement"><span class="belief">Water</span>, because sometimes I forget where I come from and what I've been given. Water brings me back to the most basic and natural need. It puts things in perspective, and reminds me that everything is fine.</p>
+
+      </div>
+
+      <div id="student" style="display:none">
+        <div class="coursework">
+          <h2>Course Work</h2>
+          <h3>M. Eng. Spring &mdash; 2014</h3>
+          <p>18.424 (Information Theory Seminar)
+          </p>
+          <h3>M. Eng. Fall &mdash; 2013</h3>
+          <p>6.438 (Algorithms for Inference)<br />
+          18.100C (Real Analysis)<br />
+          </p>
+          <h3>Junior Spring &mdash; 2013</h3>
+          <p>
+          6.268 (Network Science and Models) <br />
+          6.437 (Inference and Information) <br />
+          6.UAR (Prep for Undergrad Research) <br />
+          6.UAT (Undergrad Adv Talking) <br />
+          14.15 (Networks) <br />
+          18.418 (Topics in Computational Molecular Bio) <br />
+          18.445 (Introduction to Stochastic Process) <br />
+          </p>
+          <h3>Junior Fall &mdash; 2012</h3>
+          <p>
+          6.004 (Computation Structures)<br />
+          6.046 (Design and Analysis of Algorithms) <br />
+          6.804 (Computationl Cognitive Science) <br />         
+          6.867 (Machine Learning) <br />
+          6.UAR (Prep for Undergrad Research) <br />
+          14.26 (Economics of Incentives) <br />
+          18.443 (Statistics for Applications) <br />
+          18.S097 (Special Subject in Mathematics) <br />
+          </p>
+          <h3>Sophomore Spring &mdash; 2012</h3>
+          <p> 2.180 (Biomolecular Feedback Systems) <br />
+          6.011 (Intro to Communication, Control &amp; Signal Processing) <br />
+          6.022 (Quantitative Systems Physiology) <br />
+          14.03 (Microeconomic Theory &amp; Public Policy) <br />
+          21W.789 (Communicating with Mobile Tech)
+          </p>
+          <h3>Sophomore Fall &mdash; 2011 </h3>
+          <p> 
+          6.003 (Signals and Systems) <br>
+          6.006 (Introduction to Algorithms) <br>
+          6.02 (Intro to EECS II) <br>
+          6.021 (Cellular Biophysics) <br>
+          14.02 (Macroeconomics) <br>
+          14.12 (Game Theory) </p>
+          <h3>Freshman Spring &mdash; 2011 </h3>
+          <p> 
+          6.002 (Circuits and Electronics) <br>
+          6.007 (Electromagnetic Energy: From Motors to Lasers) <br>
+          6.01 (Intro to EECS I) <br>
+          14.01 (Microeconomics)<br>
+          15.401 (Finance Theory I) <br>
+          18.440 (Probability &amp; Random Variables)</p>
+          <h3>Freshman Fall &mdash; 2010</h3>
+          <p> 5.112 (Principles of Chemical Science)<br>
+          7.012 (Introductory Biology)<br>
+          18.03 (Differential Equations) <br>
+          21W.785 (Communicating with Web-Based Media)</p>
+        </div>
+        <div class="clubs activity">
+          <h2>Clubs and Extracurriculars</h2>
+          <h3>Traders@MIT</h3>
+          <p>Board Member (2012-2014)</p>
+
+          <h3>Phi Kappa Theta Fraternity</h3>
+          <p>Brother (2010-)<br />
+          </p>
+        </div>
+
+      </div>
+
+      <div id="coder" style="display:none">
+        <h2>Primary Languages: Python, C++, MATLAB</h2>
+        <h2>Secondary Languages: Java, OCaml, bash</h2>
+        <h2>Github: <a href="https://github.com/bonnyjain">bonnyjain</a></h2>
+        <h2>Twitter: <a href="https://twitter.com/bonnyjain">bonnyjain</a></h2>
+
+      </div>
+    </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61196573-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
